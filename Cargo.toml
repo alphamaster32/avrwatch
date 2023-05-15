@@ -7,4 +7,3 @@ edition = "2021"
 
 [dependencies]
 elven_parse = { path = "./shared/elven_parse" }
-capstone = "0.11.0"
