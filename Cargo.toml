@@ -7,3 +7,6 @@ edition = "2021"
 
 [dependencies]
 elven_parse = { path = "./shared/elven_parse" }
+gimli = "0.27.2"
+object = "0.31.1"
+memmap2 = "0.6.1"
