@@ -638,7 +638,7 @@ impl From<u32> for Inst {
                 inst.rd = Some((dest74 as u8 + 16).into());
             },
             Opcode::BRNE => {
-                inst.imm = Some(((half1 << 6) >> 9) as i32);
+                inst.imm = Some((((half1 << 6) as i16) >> 9) as i32);
             },
             Opcode::SBIW => {
                 let imm30 = (half1 << 12) >> 12;
@@ -683,7 +683,7 @@ impl From<u32> for Inst {
                 inst.rr = Some(((source30 | (source9 << 4)) as u8).into());
             },
             Opcode::BREQ => {
-                inst.imm = Some(((half1 << 6) >> 9) as i32);
+                inst.imm = Some((((half1 << 6) as i16) >> 9) as i32);
             },
             Opcode::MOV => {
                 let dest84 = (half1 << 7) >> 11;
@@ -704,7 +704,7 @@ impl From<u32> for Inst {
                 inst.rr = Some((dest84 as u8).into());
             },
             Opcode::BRCS => {
-                inst.imm = Some(((half1 << 6) >> 9) as i32);
+                inst.imm = Some((((half1 << 6) as i16) >> 9) as i32);
             },
             Opcode::ADIW => {
                 let imm30 = (half1 << 12) >> 12;
@@ -793,7 +793,7 @@ impl From<u32> for Inst {
                 inst.imm  = Some(half2 as i32);
             },
             Opcode::BRCC => {
-                inst.imm = Some(((half1 << 6) >> 9) as i32);
+                inst.imm = Some((((half1 << 6) as i16) >> 9) as i32);
             },
             Opcode::SBIS => {
                 // FIXME: has too many register bits needs inst refactor
@@ -809,10 +809,10 @@ impl From<u32> for Inst {
                 inst.rd = Some((((half1 << 7) >> 11) as u8).into());
             },
             Opcode::RCALL => {
-                inst.imm = Some((half1 & 0b0000_1111_1111_1111) as i32);
+                inst.imm = Some((((half1 as i16) << 4) >> 4) as i32);
             },
             Opcode::BRLT => {
-                inst.imm = Some(((half1 & 0b0000_0011_1111_1000) >> 3) as i32);
+                inst.imm = Some((((half1 << 6) as i16) >> 9) as i32);
             },
             Opcode::BST => {
                 let dest84 = (half1 << 7) >> 11;
@@ -833,13 +833,13 @@ impl From<u32> for Inst {
                 inst.rd = Some((dest84 as u8).into());
             },
             Opcode::BRTC => {
-                inst.imm = Some(((half1 & 0b0000_0011_1111_1000) >> 3) as i32);
+                inst.imm = Some((((half1 << 6) as i16) >> 9) as i32);
             },
             Opcode::BRPL => {
-                inst.imm = Some(((half1 & 0b0000_0011_1111_1000) >> 3) as i32);
+                inst.imm = Some((((half1 << 6) as i16) >> 9) as i32);
             },
             Opcode::BRGE => {
-                inst.imm = Some(((half1 & 0b0000_0011_1111_1000) >> 3) as i32);
+                inst.imm = Some((((half1 << 6) as i16) >> 9) as i32);
             },
             Opcode::COM => {
                 let dest84 = (half1 << 7) >> 11;
@@ -884,7 +884,7 @@ impl From<u32> for Inst {
                 inst.rd = Some((dest84 as u8).into());
             },
             Opcode::BRMI => {
-                inst.imm = Some(((half1 & 0b0000_0011_1111_1000) >> 3) as i32);
+                inst.imm = Some((((half1 << 6) as i16) >> 9) as i32);
             },
             Opcode::BLD => {
                 let dest84 = (half1 << 7) >> 11;
